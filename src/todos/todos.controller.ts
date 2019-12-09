@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './interface/todo.interface';
@@ -9,6 +9,7 @@ export class TodosController {
   constructor(private readonly todosService: TodosService) {}
 
   @Post()
+  @UsePipes(ValidationPipe)
   async create(@Body() createTodoDto: CreateTodoDto) {
     this.todosService.create(createTodoDto);
   }
