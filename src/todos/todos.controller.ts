@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { Todo } from './interface/todo.interface';
@@ -10,8 +17,8 @@ export class TodosController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  async create(@Body() createTodoDto: CreateTodoDto) {
-    this.todosService.create(createTodoDto);
+  async create(@Body() createTodoDto: CreateTodoDto): Promise<Todo> {
+    return this.todosService.create(createTodoDto);
   }
 
   @Get()
